@@ -43,7 +43,7 @@ function getRandomPositionY() {
 
 // Render all no target images
 function loadNoTarget(){
-  for(var l = 0; l < 24; l++){
+  for(var l = 0; l < 7; l++){
     for(var i = 0; i < 5; i++){
       var x = getRandomPositionX();
       var y = getRandomPositionY();
