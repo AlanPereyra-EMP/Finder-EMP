@@ -6,3 +6,16 @@
   margin-right: auto;
   max-width: 100%;
 }
+#femp-title{
+  font-size: 37px;
+  padding: 0;
+  text-align: center;
+}
+#femp-p{
+  padding: 0 9%;
+  text-align: center;
+}
+#femp-counter{
+  font-size: 60px;
+  text-align: center;
+}

@@ -3,6 +3,7 @@
 function my_action_javascript() { ?>
 	<script type="text/javascript" >
 		var fempUrlTarget = '<?php echo plugins_url( 'images/target.svg', __DIR__ ); ?>';
+		var fempUrlButton = '<?php echo plugins_url( 'images/button.svg', __DIR__ ); ?>';
 
 		var fempImgs = 4;//Defines the amount of images that the plugin includes
 		var url = '<?php echo plugins_url( 'images/no-target', __DIR__ ); ?>';

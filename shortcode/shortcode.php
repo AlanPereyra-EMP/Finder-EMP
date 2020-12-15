@@ -9,14 +9,21 @@ if(!shortcode_exists('femp')) {
     add_action('wp_enqueue_scripts','add_femp_styles');
     add_action('wp_enqueue_scripts','add_femp_script');
 
-    $h2 = '<h2 class="text-center">Título de ejemplo</h2>';
+    // Adaptative width
+    if(wp_is_mobile()){
+      $canvas_width = 300;
+      $canvas_height = 400;
+    }else{
+      $canvas_width = 600;
+      $canvas_height = 300;
+    }
 
-    $canvas = '<canvas id="femp-bg" width="300" height="300"></canvas>';
+    $canvas = '<canvas id="femp-bg" width="'.$canvas_width.'" height="'.$canvas_height.'"></canvas>';
 
-    $counter = '<p class="text-center h3">00:00:00</p>';
 
-    return $h2.
-           $canvas.
+    $counter = '<p id="femp-counter">00:00:00</p>';
+
+    return $canvas.
            $counter;
   }
   add_shortcode('femp', 'femp_shortcode');
