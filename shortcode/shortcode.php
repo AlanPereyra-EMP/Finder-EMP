@@ -5,7 +5,7 @@ if(!shortcode_exists('femp')) {
 
   function femp_shortcode($atts) {
     // Enqueue all Js and Css included above
-    add_action( 'wp_enqueue_scripts', 'my_action_javascript' );
+    add_action( 'wp_enqueue_scripts', 'php_variables_javascript' );
     add_action('wp_enqueue_scripts','add_femp_styles');
     add_action('wp_enqueue_scripts','add_femp_script');
 

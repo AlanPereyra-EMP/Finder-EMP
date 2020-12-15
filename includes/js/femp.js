@@ -16,26 +16,27 @@ ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 ctx.fillStyle = '#262626';
 ctx.font = "15px Varela Round";
 ctx.textAlign = "center";
-ctx.fillText("El objeto a encontrar es el siguiente:", (xCenter + 28), (yCenter /2));
+ctx.fillText("El objeto a encontrar es el siguiente:", (xCenter + 28), (yCenter /1.5));
 ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter * 1.7));
 
-// Load star button
-var startButton = new Image();
-startButton.src = fempUrlButton;
-startButton.addEventListener("load", loadStartButton);
-
-function loadStartButton() {
-  ctx.drawImage(startButton, xCenter, yCenter);
-}
-
-// preLoad all images
+// Load target in the center as start button
 var target = new Image();
 target.src = fempUrlTarget;
+target.addEventListener("load", loadStartButton);
 
+function loadStartButton() {
+  ctx.drawImage(target, xCenter, yCenter);
+}
+
+// Load audio
+var audioStart = new Audio(fempUrlStartAudio);
+var audioNext = new Audio(fempUrlNextAudio);
+
+// preLoad all images
 var noTarget = [];
 var targetClicked = false;
 
-function preLoadNoTarget(){
+function preLoad(){
   for(var i = 0; i < 5; i++){
     noTarget[i] = new Image();
     noTarget[i].src = fempUrlNoTarget[i];
@@ -46,8 +47,6 @@ function preLoadNoTarget(){
       loadNoTarget();
     }
   }
-}
-function preLoadTarget(){
   if(targetClicked == false){
     target.addEventListener("load", loadTarget);
     loadTarget();
@@ -66,21 +65,16 @@ function ifFempStated() {
   if (fempStarted) {
     detectTouchedTarget(event);
   }else if(((xCoord >= xCenter && xCoord <= (xCenter + fempImgsSize))&&(yCoord >= yCenter && yCoord <= (yCenter + fempImgsSize)))){
-    fempResetCanvas();
-    fempStart();
     fempStarted = true;
+    fempResetCanvas();
+    preLoad();
+    audioStart.play();
   }
 }
 function fempResetCanvas(){
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   ctx.fillStyle = '#FDF8EA';
   ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-}
-
-// Wait for the user touch in star button, then star game
-function fempStart() {
-  preLoadNoTarget();
-  preLoadTarget();
 }
 
 // Get random position (min/max) with separation between images
@@ -130,11 +124,17 @@ function detectTouchedTarget(event){
   var xCoord = event.layerX;
   var yCoord = event.layerY;
   if((xCoord >= tCoordX && xCoord <= (tCoordX + fempImgsSize))&&(yCoord >= tCoordY && yCoord <= (tCoordY + fempImgsSize))){
-    fempResetCanvas();  
+    fempResetCanvas();
     targetClicked = true;
-    preLoadNoTarget();
-    loadTarget();
+    preLoad();
     fempLevel++;
+    if((fempLevel % 5) == 0){
+      audioStart.currentTime = 0;
+      audioStart.play();
+    }else{
+      audioNext.currentTime = 0;
+      audioNext.play();
+    }
     console.log(fempLevel);
   }
 }
