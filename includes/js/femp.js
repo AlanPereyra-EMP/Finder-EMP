@@ -39,13 +39,6 @@ var targetClicked = false;
 for(var i = 0; i < 5; i++){
   noTarget[i] = new Image();
   noTarget[i].src = fempUrlNoTarget[i];
-
-  // if(targetClicked==false){
-  //   noTarget[i].addEventListener("load", noTargetReady);
-  //   function noTargetReady(){
-  //     noTargetReady[i] = true;
-  //   }
-  // }
 }
 
 function preLoad(){
@@ -92,7 +85,7 @@ function getRandomPositionY() {
 
 // Render all no target images
 function loadNoTarget(){
-  for(var l = 0; l < 25; l++){
+  for(var l = 0; l < 35; l++){
     for(var i = 0; i < 5; i++){
       var x = getRandomPositionX();
       var y = getRandomPositionY();
@@ -119,7 +112,13 @@ function loadTarget(){
 
 // Detects if the target has been touched and reset the level
 var fempLevel = 0;
+var touchCount = 0;
 function detectTouchedTarget(event){
+  // Record number of touches
+  touchCount++;
+  var touchCounter = document.getElementById('femp-touch');
+  touchCounter.innerHTML = touchCount;
+
   var xCoord = event.layerX;
   var yCoord = event.layerY;
   if((xCoord >= tCoordX && xCoord <= (tCoordX + fempImgsSize))&&(yCoord >= tCoordY && yCoord <= (tCoordY + fempImgsSize))){
@@ -134,12 +133,17 @@ function detectTouchedTarget(event){
       audioNext.currentTime = 0;
       audioNext.play();
     }
-    console.log(fempLevel);
   }
 }
 
+    console.log(fempLevels);
+
 // Add fade in animation class
 window.onload = function(){
-  const fempPage = document.getElementById('femp-page');
-  fempPage.classList.add("femp-faded");
+  var fempFadeIn = document.getElementById('femp-page');
+  fempFadeIn.classList.add("femp-faded");
+  var fempFadeIn = document.getElementById('femp-bg');
+  fempFadeIn.classList.add("femp-faded");
+  var fempFadeIn = document.getElementById('femp-counter');
+  fempFadeIn.classList.add("femp-faded");
 }

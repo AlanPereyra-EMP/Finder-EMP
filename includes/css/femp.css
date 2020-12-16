@@ -8,6 +8,11 @@
   top: 0;
   width: 100vw;/* theme must be support viewport */
 }
+#femp-page h2{
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+}
 #femp-div{
   display: block;
   margin: auto;
@@ -30,8 +35,22 @@
   text-align: center;
 }
 #femp-counter{
+  display: block;
   font-size: 60px;
   text-align: center;
+}
+#femp-counter div{
+  display: flex;
+  font-size: 25px;
+}
+#femp-counter p{
+  margin: auto;
+  padding: 0;
+}
+@media(max-height:700px){
+  #femp-page{
+    border-bottom: 38px solid #262626;
+  }
 }
 /* Animation fade in */
 .femp-fade-in{
@@ -40,10 +59,15 @@
 	opacity: 0;
 	transition: all .5s;
 }
-.femp-faded{
+.femp-faded, .femp-faded p{
+  -khtml-opacity: 1!important;
   -webkit-opacity: 1!important;
-	-khtml-opacity: 1!important;
 	opacity: 1!important;
+}
+/* Prevent page scroll when femp start */
+body {
+  height: 100vh;
+  overflow: hidden;
 }
 /* Empralidad-Theme support */
 div#top-notice{
