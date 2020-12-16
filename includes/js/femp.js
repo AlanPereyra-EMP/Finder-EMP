@@ -35,24 +35,23 @@ var audioNext = new Audio(fempUrlNextAudio);
 // preLoad all images
 var noTarget = [];
 var targetClicked = false;
+// Put all no target images on array
+for(var i = 0; i < 5; i++){
+  noTarget[i] = new Image();
+  noTarget[i].src = fempUrlNoTarget[i];
+
+  // if(targetClicked==false){
+  //   noTarget[i].addEventListener("load", noTargetReady);
+  //   function noTargetReady(){
+  //     noTargetReady[i] = true;
+  //   }
+  // }
+}
 
 function preLoad(){
-  for(var i = 0; i < 5; i++){
-    noTarget[i] = new Image();
-    noTarget[i].src = fempUrlNoTarget[i];
 
-    if(targetClicked==false){
-      noTarget[i].addEventListener("load", loadNoTarget);
-    }else{
-      loadNoTarget();
-    }
-  }
-  if(targetClicked == false){
-    target.addEventListener("load", loadTarget);
-    loadTarget();
-  }else{
-    loadTarget();
-  }
+  loadNoTarget();
+  loadTarget();
 }
 
 // Start mousedown event
@@ -93,7 +92,7 @@ function getRandomPositionY() {
 
 // Render all no target images
 function loadNoTarget(){
-  for(var l = 0; l < 7; l++){
+  for(var l = 0; l < 25; l++){
     for(var i = 0; i < 5; i++){
       var x = getRandomPositionX();
       var y = getRandomPositionY();
@@ -137,4 +136,10 @@ function detectTouchedTarget(event){
     }
     console.log(fempLevel);
   }
+}
+
+// Add fade in animation class
+window.onload = function(){
+  const fempPage = document.getElementById('femp-page');
+  fempPage.classList.add("femp-faded");
 }

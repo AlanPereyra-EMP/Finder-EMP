@@ -18,13 +18,17 @@ if(!shortcode_exists('femp')) {
       $canvas_height = 300;
     }
 
-    $canvas = '<canvas id="femp-bg" width="'.$canvas_width.'" height="'.$canvas_height.'"></canvas>';
+    $canvas = '<canvas id="femp-bg" class="faded" style="opacity:0;" width="'.$canvas_width.'" height="'.$canvas_height.'"></canvas>';
 
 
     $counter = '<p id="femp-counter">00:00:00</p>';
 
-    return $canvas.
-           $counter;
+    return '<div id="femp-page" class="femp-fade-in">
+              <div id="femp-div">'.
+                $canvas.
+                $counter.
+              '</div>
+            </div>';
   }
   add_shortcode('femp', 'femp_shortcode');
 }

@@ -1,3 +1,17 @@
+#femp-page{
+  background: #fff;
+  border-top: 60px solid #262626;
+  display: flex;
+  height: 100vh;/* theme must be support viewport */
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;/* theme must be support viewport */
+}
+#femp-div{
+  display: block;
+  margin: auto;
+}
 #femp-bg{
   border: 5px solid #ddd;
   border-radius: 5px;
@@ -18,4 +32,20 @@
 #femp-counter{
   font-size: 60px;
   text-align: center;
+}
+/* Animation fade in */
+.femp-fade-in{
+  -khtml-opacity: 0;
+  -webkit-opacity: 0;
+	opacity: 0;
+	transition: all .5s;
+}
+.femp-faded{
+  -webkit-opacity: 1!important;
+	-khtml-opacity: 1!important;
+	opacity: 1!important;
+}
+/* Empralidad-Theme support */
+div#top-notice{
+  display: none;
 }
