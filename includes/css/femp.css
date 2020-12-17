@@ -70,6 +70,17 @@ body {
   overflow: hidden;
 }
 /* Empralidad-Theme support */
-div#top-notice{
+#top-notice{
   display: none;
+}
+#wpadminbar{
+  display: none!important;
+}
+.admin-fixed-top {
+  top: 0!important;
+  position: fixed;
+  width: 100vw;
+}
+.femp-d-none{
+  display: none;;
 }

@@ -31,6 +31,7 @@ function loadStartButton() {
 // Load audio
 var audioStart = new Audio(fempUrlStartAudio);
 var audioNext = new Audio(fempUrlNextAudio);
+var audioWin = new Audio(fempUrlWinAudio);
 
 // preLoad all images
 var noTarget = [];
@@ -57,6 +58,7 @@ function ifFempStated() {
   if (fempStarted) {
     detectTouchedTarget(event);
   }else if(((xCoord >= xCenter && xCoord <= (xCenter + fempImgsSize))&&(yCoord >= yCenter && yCoord <= (yCenter + fempImgsSize)))){
+    // Do start counter
     fempStarted = true;
     fempResetCanvas();
     preLoad();
@@ -113,30 +115,39 @@ function loadTarget(){
 // Detects if the target has been touched and reset the level
 var fempLevel = 0;
 var touchCount = 0;
+var touchCounter = document.getElementById('femp-touch');
+touchCounter.innerHTML = touchCount;
+var remainingLevels = 10;// Do get shortcode value
+var remainingCounter = document.getElementById('femp-remaining');
+remainingCounter.innerHTML = remainingLevels - fempLevel;
+var remainingCounterP = document.getElementById('femp-remaining-p');
+
 function detectTouchedTarget(event){
   // Record number of touches
   touchCount++;
-  var touchCounter = document.getElementById('femp-touch');
   touchCounter.innerHTML = touchCount;
 
   var xCoord = event.layerX;
   var yCoord = event.layerY;
   if((xCoord >= tCoordX && xCoord <= (tCoordX + fempImgsSize))&&(yCoord >= tCoordY && yCoord <= (tCoordY + fempImgsSize))){
     fempResetCanvas();
-    targetClicked = true;
-    preLoad();
-    fempLevel++;
-    if((fempLevel % 5) == 0){
-      audioStart.currentTime = 0;
-      audioStart.play();
+    if(remainingLevels <= 1){
+      // Do stop counter
+      remainingCounterP.classList.add('femp-d-none');
+      audioWin.currentTime = 0;
+      audioWin.play();
+      fempResetCanvas();
     }else{
+      targetClicked = true;
+      preLoad();
+      remainingLevels--;
+      fempLevel++;
+      remainingCounter.innerHTML = remainingLevels;
       audioNext.currentTime = 0;
       audioNext.play();
     }
   }
 }
-
-    console.log(fempLevels);
 
 // Add fade in animation class
 window.onload = function(){

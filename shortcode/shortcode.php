@@ -41,7 +41,7 @@ if(!shortcode_exists('femp')) {
 
     $counter = '<div id="femp-counter" class="femp-fade-in">
                   <div>
-                    <p>Faltan: '.$levels.'</p>
+                    <p id="femp-remaining-p">Faltan: <span id="femp-remaining"></span></p>
                     <p>Toques: <span id="femp-touch"></span></p>
                   </div>
                   <p>00:00:00</p>
