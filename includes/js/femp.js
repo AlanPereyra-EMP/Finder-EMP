@@ -37,7 +37,7 @@ var audioWin = new Audio(fempUrlWinAudio);
 var noTarget = [];
 var targetClicked = false;
 // Put all no target images on array
-for(var i = 0; i < 5; i++){
+for(var i = 0; i < 6; i++){
   noTarget[i] = new Image();
   noTarget[i].src = fempUrlNoTarget[i];
 }
@@ -89,7 +89,7 @@ function getRandomPositionY() {
 // Render all no target images
 function loadNoTarget(){
   for(var l = 0; l < 35; l++){
-    for(var i = 0; i < 5; i++){
+    for(var i = 0; i < 6; i++){
       var x = getRandomPositionX();
       var y = getRandomPositionY();
       ctx.drawImage(noTarget[i], x, y);

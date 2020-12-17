@@ -18,7 +18,7 @@ function php_variables_javascript() { ?>
     var fempUrlNextAudio = '<?php echo plugins_url( 'includes/sounds/MetallicClank.mp3', __DIR__ ); ?>';
 		var fempUrlWinAudio = '<?php echo plugins_url( 'includes/sounds/456966__funwithsound__success-fanfare-trumpets.mp3', __DIR__ ); ?>';
 
-		var fempImgs = 4;//Defines the amount of images that the plugin includes
+		var fempImgs = 5;//Defines the amount of images that the plugin includes
 		var url = '<?php echo plugins_url( 'includes/images/no-target', __DIR__ ); ?>';
 		var fempUrlNoTarget = [];
 
