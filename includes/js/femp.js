@@ -59,6 +59,7 @@ function ifFempStated() {
     detectTouchedTarget(event);
   }else if(((xCoord >= xCenter && xCoord <= (xCenter + fempImgsSize))&&(yCoord >= yCenter && yCoord <= (yCenter + fempImgsSize)))){
     // Do start counter
+    counter();
     fempStarted = true;
     fempResetCanvas();
     preLoad();
@@ -114,6 +115,7 @@ function loadTarget(){
 
 // Detects if the target has been touched and reset the level
 var fempLevel = 0;
+var fempCounter;
 var touchCount = 0;
 var touchCounter = document.getElementById('femp-touch');
 touchCounter.innerHTML = touchCount;
@@ -132,7 +134,7 @@ function detectTouchedTarget(event){
   if((xCoord >= tCoordX && xCoord <= (tCoordX + fempImgsSize))&&(yCoord >= tCoordY && yCoord <= (tCoordY + fempImgsSize))){
     fempResetCanvas();
     if(remainingLevels <= 1){
-      // Do stop counter
+      clearInterval(fempCounter);
       remainingCounterP.classList.add('femp-d-none');
       // Win sound
       audioWin.currentTime = 0;
@@ -160,7 +162,32 @@ function detectTouchedTarget(event){
 
 
 // Counter
-
+var ms = 0;
+var s = 0;
+var m = 0;
+var msDisplay = document.getElementById('femp-mili');
+var sDisplay = document.getElementById('femp-sec');
+var mDisplay = document.getElementById('femp-min');
+msDisplay.innerHTML = ('0' + ms).slice(-2);
+sDisplay.innerHTML = ('0' + s).slice(-2);
+mDisplay.innerHTML = ('0' + m).slice(-2);
+function counter(){
+  fempCounter = setInterval(printTime, 10);
+}
+function printTime() {
+  ms++;
+  msDisplay.innerHTML = ('0' + ms).slice(-2);
+  if(ms>99){
+    ms = 0;
+    s++;
+    sDisplay.innerHTML = ('0' + s).slice(-2);
+  }
+  if(s>59){
+    s = 0;
+    m++;
+    mDisplay.innerHTML = ('0' + m).slice(-2);
+  }
+}
 
 
 // Add fade in animation class

@@ -40,7 +40,9 @@ if(!shortcode_exists('femp')) {
     $canvas = '<canvas id="femp-bg" class="femp-fade-in" width="'.$canvas_width.'" height="'.$canvas_height.'"></canvas>';
 
     $counter = '<div id="femp-counter" class="femp-fade-in">
-                  <p>00:00:00</p>
+                  <p>
+                    <span id="femp-min"></span>:<span id="femp-sec"></span>:<span id="femp-mili"></span>
+                  </p>
                   <div>
                     <p id="femp-remaining-p">Faltan: <span id="femp-remaining"></span></p>
                     <p>Toques: <span id="femp-touch"></span></p>
