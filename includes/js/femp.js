@@ -134,9 +134,16 @@ function detectTouchedTarget(event){
     if(remainingLevels <= 1){
       // Do stop counter
       remainingCounterP.classList.add('femp-d-none');
+      // Win sound
       audioWin.currentTime = 0;
       audioWin.play();
+      // Win message
       fempResetCanvas();
+      ctx.fillStyle = '#262626';
+      ctx.font = "15px Varela Round";
+      ctx.textAlign = "center";
+      ctx.fillText("Felicidades, Completaste el juego!!", (xCenter + 28), (yCenter /1.5));
+      ctx.fillText("Tu tuempo fue:", (xCenter + 28), (yCenter * 2));
     }else{
       targetClicked = true;
       preLoad();
@@ -148,6 +155,11 @@ function detectTouchedTarget(event){
     }
   }
 }
+
+
+// Counter
+
+
 
 // Add fade in animation class
 window.onload = function(){

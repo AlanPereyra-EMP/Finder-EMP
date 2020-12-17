@@ -12,6 +12,7 @@
   text-align: center;
   font-size: 50px;
   margin: 0;
+  padding: 0;
 }
 #femp-div{
   display: block;
@@ -47,9 +48,18 @@
   margin: auto;
   padding: 0;
 }
-@media(max-height:700px){
+@media(max-width:565px){
   #femp-page{
     border-bottom: 38px solid #262626;
+  }
+}
+@media(max-height:630px){
+  #femp-page h2{
+    font-size: 30px;
+  }
+  #femp-counter p {
+    font-size: 25px;
+    margin: auto;
   }
 }
 /* Animation fade in */
