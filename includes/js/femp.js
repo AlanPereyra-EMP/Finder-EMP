@@ -140,10 +140,12 @@ function detectTouchedTarget(event){
       // Win message
       fempResetCanvas();
       ctx.fillStyle = '#262626';
-      ctx.font = "15px Varela Round";
+      ctx.font = "25px Varela Round";
       ctx.textAlign = "center";
-      ctx.fillText("Felicidades, Completaste el juego!!", (xCenter + 28), (yCenter /1.5));
-      ctx.fillText("Tu tuempo fue:", (xCenter + 28), (yCenter * 2));
+      ctx.fillText("Felicidades,", (xCenter + 28), (yCenter));
+      ctx.fillText("Completaste el juego!!", (xCenter + 28), (yCenter*1.2));
+      ctx.font = "15px Varela Round";
+      ctx.fillText("Tu tuempo fue:", (xCenter + 28), (yCenter * 2.2));
     }else{
       targetClicked = true;
       preLoad();
