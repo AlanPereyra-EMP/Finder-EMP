@@ -145,7 +145,7 @@ function detectTouchedTarget(event){
       ctx.fillText("Felicidades,", (xCenter + 28), (yCenter));
       ctx.fillText("Completaste el juego!!", (xCenter + 28), (yCenter*1.2));
       ctx.font = "15px Varela Round";
-      ctx.fillText("Tu tuempo fue:", (xCenter + 28), (yCenter * 2.2));
+      ctx.fillText("Tu tiempo fue:", (xCenter + 28), (yCenter * 2.2));
     }else{
       targetClicked = true;
       preLoad();
