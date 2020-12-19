@@ -1,4 +1,24 @@
 <?php
+function add_femp_config_script(){
+  $src = plugins_url( 'includes/js/config.js', __DIR__ );
+  wp_enqueue_script( 'femp_config_js', $src);
+  wp_register_script( 'femp_config_js', $src );
+}
+function add_femp_files_script(){
+  $src = plugins_url( 'includes/js/files.js', __DIR__ );
+  wp_enqueue_script( 'femp_files_js', $src);
+  wp_register_script( 'femp_files_js', $src );
+}
+function add_femp_counter_script(){
+  $src = plugins_url( 'includes/js/counter.js', __DIR__ );
+  wp_enqueue_script( 'femp_counter_js', $src);
+  wp_register_script( 'femp_counter_js', $src );
+}
+function add_femp_send_script(){
+  $src = plugins_url( 'includes/js/send-result.js', __DIR__ );
+  wp_enqueue_script( 'femp_send_js', $src);
+  wp_register_script( 'femp_send_js', $src );
+}
 function add_femp_script(){
   $src = plugins_url( 'includes/js/femp.js', __DIR__ );
   wp_enqueue_script( 'femp_js', $src);
@@ -11,20 +31,9 @@ function add_femp_styles(){
 }
 
 // Php url images to JS variables using WP Enqueue script
-function php_variables_javascript() { ?>
+function php_url_javascript() { ?>
 	<script type="text/javascript" >
-		var fempUrlTarget = '<?php echo plugins_url( 'includes/images/target.svg', __DIR__ ); ?>';
-    var fempUrlStartAudio = '<?php echo plugins_url( 'includes/sounds/WoodPlankFlicks.mp3', __DIR__ ); ?>';
-    var fempUrlNextAudio = '<?php echo plugins_url( 'includes/sounds/MetallicClank.mp3', __DIR__ ); ?>';
-		var fempUrlWinAudio = '<?php echo plugins_url( 'includes/sounds/456966__funwithsound__success-fanfare-trumpets.mp3', __DIR__ ); ?>';
-
-		var fempImgs = 5;//Defines the amount of images that the plugin includes
-		var url = '<?php echo plugins_url( 'includes/images/no-target', __DIR__ ); ?>';
-		var fempUrlNoTarget = [];
-
-		for(var i = 0; i<= fempImgs; i++){
-			fempUrlNoTarget[i] = url + '-' + i + '.svg';
-		}
+    var fempUrl = '<?php echo plugins_url('', __DIR__ ); ?>';
 	</script> <?php
 }
 ?>

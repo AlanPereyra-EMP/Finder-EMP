@@ -9,4 +9,4 @@ En la parte superior está la imagen del objeto que hay que encontrar y en la pa
 
 Para insertarse en una página o artículo el minijuego se debe escribir el siguiente shortcode:
 
-> [FEMP something=""]
+> [FEMP]

@@ -5,26 +5,13 @@ if(!shortcode_exists('femp')) {
 
   function femp_shortcode($atts) {
     // Enqueue all Js and Css included above
-    add_action( 'wp_enqueue_scripts', 'php_variables_javascript' );
-    add_action( 'wp_enqueue_scripts', 'php_atrubutes_javascript' );
+    add_action('wp_enqueue_scripts','php_url_javascript', 7, 1);
+    add_action('wp_enqueue_scripts','add_femp_config_script', 10, 1);
+    add_action('wp_enqueue_scripts','add_femp_files_script', 8, 1);
+    add_action('wp_enqueue_scripts','add_femp_counter_script', 9, 1);
+    add_action('wp_enqueue_scripts','add_femp_send_script', 9, 1);
+    add_action('wp_enqueue_scripts','add_femp_script', 10, 1);
     add_action('wp_enqueue_scripts','add_femp_styles');
-    add_action('wp_enqueue_scripts','add_femp_script');
-
-    // Atributes
-  	$atributes = shortcode_atts( array(
-      'levels' => '10',
-      'counter' => 'asc'
-    ), $atts );
-
-    // Save shortcode atributes values on JS variables
-    $levels = $atributes['levels'];
-    function php_atrubutes_javascript() {
-    ?>
-    	<script type="text/javascript">
-        var fempLevels = '<?php echo $levels ?>';
-        console.log(fempLevels);
-      </script>
-    <?php }
 
     // Adaptative width
     if(wp_is_mobile()){
@@ -39,8 +26,10 @@ if(!shortcode_exists('femp')) {
 
     $canvas = '<canvas id="femp-bg" class="femp-fade-in" width="'.$canvas_width.'" height="'.$canvas_height.'"></canvas>';
 
+    $form = '<div id="femp-form-div"></div>';
+
     $counter = '<div id="femp-counter" class="femp-fade-in">
-                  <p>
+                  <p id="femp-counter-p">
                     <span id="femp-min"></span>:<span id="femp-sec"></span>:<span id="femp-mili"></span>
                   </p>
                   <div>
@@ -54,12 +43,11 @@ if(!shortcode_exists('femp')) {
               <div id="femp-div">'.
                 $title.
                 $canvas.
+                $form.
                 $counter.
               '</div>
             </div>';
   }
   add_shortcode('femp', 'femp_shortcode');
 }
-
-
 ?>

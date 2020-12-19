@@ -8,6 +8,9 @@
   top: 0;
   width: 100vw;/* theme must be support viewport */
 }
+.femp-d-none{
+  display: none!important;
+}
 #femp-page h2{
   text-align: center;
   font-size: 50px;
@@ -17,6 +20,7 @@
 #femp-div{
   display: block;
   margin: auto;
+  position: relative;
 }
 #femp-bg{
   border: 5px solid #ddd;
@@ -25,6 +29,35 @@
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
+}
+#femp-form-div{
+  background: #fdf8ea;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+}
+#femp-form p{
+  padding: 0;
+}
+#femp-form input{
+  width: 100%;
+}
+#femp-form span {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+#femp-form button{
+  border: 1px solid #000;
+  font-size: 15px;
+  margin: 1%;
+  padding: 6px;
+}
+.femp-btn-success{
+  background: #005777;
+  color: #fff;
+  order: 2;
 }
 #femp-title{
   font-size: 37px;
@@ -52,13 +85,20 @@
   #femp-page{
     border-bottom: 38px solid #262626;
   }
+  #femp-form button{
+    font-size: 15px;
+  }
 }
 @media(max-height:630px){
   #femp-page h2{
     font-size: 30px;
   }
-  #femp-counter p {
+  #femp-counter p#femp-counter-p {
     font-size: 25px;
+    margin: auto;
+  }
+  #femp-counter p {
+    font-size: 15px;
     margin: auto;
   }
 }
@@ -93,4 +133,14 @@ body {
 }
 .femp-d-none{
   display: none;;
+}
+
+/* Html modify */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }

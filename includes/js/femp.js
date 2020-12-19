@@ -1,201 +1,153 @@
-// Get canvas context
-const canvas = document.getElementById('femp-bg');
+function femp(data) {
+  // Get canvas
+  const canvas = document.getElementById('femp-bg');
 
-// Defines canvas and images sizes
-const canvasHeight = canvas.height;
-const canvasWidth = canvas.width;
-const fempImgsSize = 50;//50x50px
+  // Detects center of canvas
+  const imgSize = data.imgSize;
+  const yCenter = (canvas.height/2)-(imgSize/2);
+  const xCenter = (canvas.width/2)-(imgSize/2);
 
-// Detects center of canvas
-var yCenter = (canvasHeight/2)-(fempImgsSize/2);
-var xCenter = (canvasWidth/2)-(fempImgsSize/2);
-
-var ctx = canvas.getContext('2d');
-ctx.fillStyle = '#FDF8EA';
-ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-ctx.fillStyle = '#262626';
-ctx.font = "15px Varela Round";
-ctx.textAlign = "center";
-ctx.fillText("El objeto a encontrar es el siguiente:", (xCenter + 28), (yCenter /1.5));
-ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter * 1.7));
-
-// Load target in the center as start button
-var target = new Image();
-target.src = fempUrlTarget;
-target.addEventListener("load", loadStartButton);
-
-function loadStartButton() {
-  ctx.drawImage(target, xCenter, yCenter);
-}
-
-// Load audio
-var audioStart = new Audio(fempUrlStartAudio);
-var audioNext = new Audio(fempUrlNextAudio);
-var audioWin = new Audio(fempUrlWinAudio);
-
-// preLoad all images
-var noTarget = [];
-var targetClicked = false;
-// Put all no target images on array
-for(var i = 0; i < 6; i++){
-  noTarget[i] = new Image();
-  noTarget[i].src = fempUrlNoTarget[i];
-}
-
-function preLoad(){
-
-  loadNoTarget();
-  loadTarget();
-}
-
-// Start mousedown event
-canvas.addEventListener("mousedown", ifFempStated);
-var fempStarted = false;
-
-function ifFempStated() {
-  var xCoord = event.layerX;
-  var yCoord = event.layerY;
-  if (fempStarted) {
-    detectTouchedTarget(event);
-  }else if(((xCoord >= xCenter && xCoord <= (xCenter + fempImgsSize))&&(yCoord >= yCenter && yCoord <= (yCenter + fempImgsSize)))){
-    // Do start counter
-    counter();
-    fempStarted = true;
-    fempResetCanvas();
-    preLoad();
-    audioStart.play();
-  }
-}
-function fempResetCanvas(){
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  // Draws start message with target in the center
+  var ctx = canvas.getContext('2d');
   ctx.fillStyle = '#FDF8EA';
-  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-}
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#262626';
+  ctx.font = "15px Varela Round";
+  ctx.textAlign = "center";
+  ctx.fillText("El objeto a encontrar es el siguiente:", (xCenter + 28), (yCenter /1.5));
+  ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter * 1.7));
 
-// Get random position (min/max) with separation between images
-function getRandomPositionX() {
-  var ctxMaxWidth = canvasWidth - fempImgsSize;//600x600px - img = 550px
-  var maxNumberImg = ctxMaxWidth/fempImgsSize;
-  var random = (Math.floor(Math.random() * (maxNumberImg - 0 + 1) + 0))* fempImgsSize;
-  return random;
-}
-function getRandomPositionY() {
-  var ctxMaxHeight = canvasHeight - fempImgsSize;
-  var maxNumberImg = ctxMaxHeight/fempImgsSize;
-  var random = (Math.floor(Math.random() * (maxNumberImg - 0 + 1) + 0))* fempImgsSize;
-  return random;
-}
+  ctx.drawImage(target, xCenter, yCenter);
+  target.addEventListener("load", renderTargetStart);
+  function renderTargetStart() {
+    ctx.drawImage(target, xCenter, yCenter);
+  }
 
-// Render all no target images
-function loadNoTarget(){
-  for(var l = 0; l < 35; l++){
-    for(var i = 0; i < 6; i++){
-      var x = getRandomPositionX();
-      var y = getRandomPositionY();
-      ctx.drawImage(noTarget[i], x, y);
+  // Detects clicks position on canvas
+  canvas.addEventListener("mousedown", ifFempStated);
+
+  // Detect if game was started
+  var fempStarted = false;
+
+  function ifFempStated(){
+    let x = event.layerX;
+    let y = event.layerY;
+    if (fempStarted) {
+      detectTouchedTarget(event);
+    }else if(((x >= xCenter && x <= (xCenter + imgSize))&&(y >= yCenter && y <= (yCenter + imgSize)))){
+      counter();
+      fempStarted = true;
+      fempResetCanvas();
+      loadAllImgs();
+      audioStart.play();
     }
   }
-}
 
-// Render the target
-var targetCoordX;
-var targetCoordY;
 
-function loadTarget(){
-  var x = getRandomPositionX();
-  var y = getRandomPositionY();
-  setTimeout(renderTarget, 50);
-  function renderTarget() {
-    ctx.drawImage(target, x, y)
+  function fempResetCanvas(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#FDF8EA';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
-  // Saves the target coordinates in previus created variables
-  tCoordX = x;
-  tCoordY = y;
-}
 
-// Detects if the target has been touched and reset the level
-var fempLevel = 0;
-var fempCounter;
-var touchCount = 0;
-var touchCounter = document.getElementById('femp-touch');
-touchCounter.innerHTML = touchCount;
-var remainingLevels = 10;// Do get shortcode value
-var remainingCounter = document.getElementById('femp-remaining');
-remainingCounter.innerHTML = remainingLevels - fempLevel;
-var remainingCounterP = document.getElementById('femp-remaining-p');
+  // Get random position with separation between images
+  function getRandomPositionX(){
+    var ctxMaxWidth = canvas.width - imgSize;
+    var maxNumberImg = ctxMaxWidth/imgSize;
+    var random = (Math.floor(Math.random() * (maxNumberImg - 0 + 1) + 0))* imgSize;
+    return random;
+  }
+  function getRandomPositionY(){
+    var ctxMaxHeight = canvas.height - imgSize;
+    var maxNumberImg = ctxMaxHeight/imgSize;
+    var random = (Math.floor(Math.random() * (maxNumberImg - 0 + 1) + 0))* imgSize;
+    return random;
+  }
 
-function detectTouchedTarget(event){
-  // Record number of touches
-  touchCount++;
+  // Render all images on random position
+  function loadAllImgs(){
+    for(var l = 0; l < 35; l++){
+      for(var i = 0; i <= data.imgNumb; i++){
+        let x = getRandomPositionX();
+        let y = getRandomPositionY();
+        ctx.drawImage(noTarget[i], x, y);
+      }
+    }
+    let x = getRandomPositionX();
+    let y = getRandomPositionY();
+    setTimeout(renderTarget, 50);
+    function renderTarget() {
+      ctx.drawImage(target, x, y)
+    }
+    // Saves the target coordinates in previus created variables
+    tCoordX = x;
+    tCoordY = y;
+  }
+
+  // Detects if the target has been touched and reset the level
+  var touchCount = 0;
+  var touchCounter = document.getElementById('femp-touch');
   touchCounter.innerHTML = touchCount;
 
-  var xCoord = event.layerX;
-  var yCoord = event.layerY;
-  if((xCoord >= tCoordX && xCoord <= (tCoordX + fempImgsSize))&&(yCoord >= tCoordY && yCoord <= (tCoordY + fempImgsSize))){
-    fempResetCanvas();
-    if(remainingLevels <= 1){
-      clearInterval(fempCounter);
-      remainingCounterP.classList.add('femp-d-none');
-      // Win sound
-      audioWin.currentTime = 0;
-      audioWin.play();
-      // Win message
-      fempResetCanvas();
-      ctx.fillStyle = '#262626';
-      ctx.font = "25px Varela Round";
-      ctx.textAlign = "center";
-      ctx.fillText("Felicidades,", (xCenter + 28), (yCenter));
-      ctx.fillText("Completaste el juego!!", (xCenter + 28), (yCenter*1.2));
-      ctx.font = "15px Varela Round";
-      ctx.fillText("Tu tiempo fue:", (xCenter + 28), (yCenter * 2.2));
-    }else{
-      targetClicked = true;
-      preLoad();
-      remainingLevels--;
-      fempLevel++;
-      remainingCounter.innerHTML = remainingLevels;
-      audioNext.currentTime = 0;
-      audioNext.play();
+  var fempLevel = 0;
+  var remainingCounter = document.getElementById('femp-remaining');
+  remainingCounter.innerHTML = data.levels - fempLevel;
+
+  var remainingCounterP = document.getElementById('femp-remaining-p');
+
+  var winner = false;
+  function detectTouchedTarget(event){
+    // Saves number of touches
+    if(!winner){
+      touchCount++;
+    }
+    touchCounter.innerHTML = touchCount;
+
+    var xCoord = event.layerX;
+    var yCoord = event.layerY;
+    if((xCoord >= tCoordX && xCoord <= (tCoordX + imgSize))&&(yCoord >= tCoordY && yCoord <= (tCoordY + imgSize))){
+      if(data.levels <= 1 && !winner){
+        winner = true;
+        clearInterval(fempCounter);// Stops counter
+        remainingCounterP.classList.add('femp-d-none');
+        // Win sound
+        audioWin.currentTime = 0;
+        audioWin.play();
+        // Win message
+        fempResetCanvas();
+        ctx.fillStyle = '#262626';
+        ctx.font = "25px Varela Round";
+        ctx.textAlign = "center";
+        ctx.fillText("Felicidades,", (xCenter + 28), (yCenter/2.4));
+        ctx.fillText("Completaste el juego!!", (xCenter + 28), (yCenter/1.7));
+        ctx.font = "15px Varela Round";
+        ctx.fillText("Tu tiempo fue:", (xCenter + 28), (yCenter * 2.2));
+        // Do give the username and time, then send the data to the server
+        printForm(data);
+      }else if(data.levels > 1){
+        fempResetCanvas();
+        loadAllImgs();
+        data.levels--;
+        fempLevel++;
+        remainingCounter.innerHTML = data.levels;
+        audioNext.currentTime = 0;
+        audioNext.play();
+      }
     }
   }
-}
 
+  // Prevent form display when game is starting
+  var fempForm = document.getElementById('femp-form-div');
+  fempForm.innerHTML = '';
 
-// Counter
-var ms = 0;
-var s = 0;
-var m = 0;
-var msDisplay = document.getElementById('femp-mili');
-var sDisplay = document.getElementById('femp-sec');
-var mDisplay = document.getElementById('femp-min');
-msDisplay.innerHTML = ('0' + ms).slice(-2);
-sDisplay.innerHTML = ('0' + s).slice(-2);
-mDisplay.innerHTML = ('0' + m).slice(-2);
-function counter(){
-  fempCounter = setInterval(printTime, 10);
-}
-function printTime() {
-  ms++;
-  msDisplay.innerHTML = ('0' + ms).slice(-2);
-  if(ms>99){
-    ms = 0;
-    s++;
-    sDisplay.innerHTML = ('0' + s).slice(-2);
+  // Add fade in animation class
+  window.onload = function(){
+    var fempFadeIn = document.getElementById('femp-page');
+    fempFadeIn.classList.add("femp-faded");
+    fempFadeIn.classList.remove("femp-d-none");
+    var fempFadeIn = document.getElementById('femp-bg');
+    fempFadeIn.classList.add("femp-faded");
+    var fempFadeIn = document.getElementById('femp-counter');
+    fempFadeIn.classList.add("femp-faded");
   }
-  if(s>59){
-    s = 0;
-    m++;
-    mDisplay.innerHTML = ('0' + m).slice(-2);
-  }
-}
-
-
-// Add fade in animation class
-window.onload = function(){
-  var fempFadeIn = document.getElementById('femp-page');
-  fempFadeIn.classList.add("femp-faded");
-  var fempFadeIn = document.getElementById('femp-bg');
-  fempFadeIn.classList.add("femp-faded");
-  var fempFadeIn = document.getElementById('femp-counter');
-  fempFadeIn.classList.add("femp-faded");
 }
