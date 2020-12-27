@@ -25,5 +25,15 @@ function femp_install() {
 
   add_option( 'femp_db_version', $femp_db_version );
 }
-
 register_activation_hook( __FILE__, 'femp_install' );
+
+
+function femp_db_check() {
+	global $wpdb;
+	$query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table_name ) );
+  if ( ! $wpdb->get_var( $query ) == $table_name ) {
+    femp_install();
+  }
+}
+
+add_action( 'plugins_loaded', 'femp_db_check' );

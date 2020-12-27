@@ -17,6 +17,5 @@ if ( ! defined( 'ABSPATH' ) ){
 require_once plugin_dir_path(__FILE__).'/includes/index.php';
 require_once plugin_dir_path(__FILE__).'/includes/get-user-data.php';
 require_once plugin_dir_path(__FILE__).'/includes/femp-table.php';
-require_once plugin_dir_path(__FILE__).'/includes/femp-update-table.php';
 require_once plugin_dir_path(__FILE__).'/shortcode/shortcode.php';
 ?>
