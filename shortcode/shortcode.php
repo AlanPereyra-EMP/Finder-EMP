@@ -13,6 +13,10 @@ if(!shortcode_exists('femp')) {
     add_action('wp_enqueue_scripts','add_femp_script', 10, 1);
     add_action('wp_enqueue_scripts','add_femp_styles');
 
+    // wp_localize_script('femp_config_js', 'femp', [
+    //   'test' => 'asd'
+    // ]);
+
     // Adaptative width
     if(wp_is_mobile()){
       $canvas_width = 300;
@@ -26,7 +30,7 @@ if(!shortcode_exists('femp')) {
 
     $canvas = '<canvas id="femp-bg" class="femp-fade-in" width="'.$canvas_width.'" height="'.$canvas_height.'"></canvas>';
 
-    $form = '<div id="femp-form-div"></div>';
+    $form = '<form id="femp-form"></form>';
 
     $counter = '<div id="femp-counter" class="femp-fade-in">
                   <p id="femp-counter-p">

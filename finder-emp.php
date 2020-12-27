@@ -7,12 +7,16 @@ Author: Empralidad
 Author URI: https://empralidad.com.ar/
 Text Domain: femp
 License: GPLv2 or later
-Version: 0.1.2
+Version: 1.0.0
 */
 if ( ! defined( 'ABSPATH' ) ){
 	exit;
 }
 
-include plugin_dir_path(__FILE__).'/includes/index.php';
-include plugin_dir_path(__FILE__).'/shortcode/shortcode.php';
+
+require_once plugin_dir_path(__FILE__).'/includes/index.php';
+require_once plugin_dir_path(__FILE__).'/includes/get-user-data.php';
+require_once plugin_dir_path(__FILE__).'/includes/femp-table.php';
+require_once plugin_dir_path(__FILE__).'/includes/femp-update-table.php';
+require_once plugin_dir_path(__FILE__).'/shortcode/shortcode.php';
 ?>

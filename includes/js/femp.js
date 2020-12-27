@@ -1,14 +1,23 @@
-function femp(data) {
-  // Get canvas
-  const canvas = document.getElementById('femp-bg');
+function fempResetCanvas(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#FDF8EA';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+function fempTextCanvas(color, txtAlign, fSize, text, x, y) {
+  ctx.fillStyle = color;
+  ctx.font = fSize+" Varela Round";
+  ctx.textAlign = txtAlign;
+  ctx.fillText(text, (xCenter + x), (yCenter + y));
+}
 
+function femp(data) {
   // Detects center of canvas
-  const imgSize = data.imgSize;
-  const yCenter = (canvas.height/2)-(imgSize/2);
-  const xCenter = (canvas.width/2)-(imgSize/2);
+  imgSize = data.imgSize;
+  yCenter = (canvas.height/2)-(imgSize/2);
+  xCenter = (canvas.width/2)-(imgSize/2);
 
   // Draws start message with target in the center
-  var ctx = canvas.getContext('2d');
+  ctx = canvas.getContext('2d');
   ctx.fillStyle = '#FDF8EA';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = '#262626';
@@ -41,13 +50,6 @@ function femp(data) {
       loadAllImgs();
       audioStart.play();
     }
-  }
-
-
-  function fempResetCanvas(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#FDF8EA';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   // Get random position with separation between images
@@ -85,7 +87,7 @@ function femp(data) {
   }
 
   // Detects if the target has been touched and reset the level
-  var touchCount = 0;
+  touchCount = 0;
   var touchCounter = document.getElementById('femp-touch');
   touchCounter.innerHTML = touchCount;
 
@@ -96,7 +98,7 @@ function femp(data) {
   var remainingCounterP = document.getElementById('femp-remaining-p');
 
   var winner = false;
-  function detectTouchedTarget(event){
+  function detectTouchedTarget(){
     // Saves number of touches
     if(!winner){
       touchCount++;
@@ -137,17 +139,18 @@ function femp(data) {
   }
 
   // Prevent form display when game is starting
-  var fempForm = document.getElementById('femp-form-div');
+  var fempForm = document.getElementById('femp-form');
   fempForm.innerHTML = '';
 
-  // Add fade in animation class
-  window.onload = function(){
-    var fempFadeIn = document.getElementById('femp-page');
-    fempFadeIn.classList.add("femp-faded");
-    fempFadeIn.classList.remove("femp-d-none");
-    var fempFadeIn = document.getElementById('femp-bg');
-    fempFadeIn.classList.add("femp-faded");
-    var fempFadeIn = document.getElementById('femp-counter');
-    fempFadeIn.classList.add("femp-faded");
-  }
+}
+
+// Add fade in animation class
+window.onload = function(){
+  var fempFadeIn = document.getElementById('femp-page');
+  fempFadeIn.classList.add("femp-faded");
+  fempFadeIn.classList.remove("femp-d-none");
+  var fempFadeIn = document.getElementById('femp-bg');
+  fempFadeIn.classList.add("femp-faded");
+  var fempFadeIn = document.getElementById('femp-counter');
+  fempFadeIn.classList.add("femp-faded");
 }
