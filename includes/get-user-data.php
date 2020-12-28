@@ -4,40 +4,39 @@ add_action('wp_ajax_femp_send_data', 'femp_get_data');
 
 function femp_get_data(){
   $name = $_POST['name'];
-  $dni = $_POST['dni'];
+  $contact = $_POST['contact'];
   $touches = $_POST['touches'];
   $chrono = $_POST['chrono'];
 
-  if(($name != '')&&($dni != '')){
-    if((strlen($name)>2)&&(strlen($name)<61)&&(strlen($dni)>6)&&(strlen($dni)<9)){
+  if(($name != '')&&($contact != '')){
 
-      global $wpdb;
+    global $wpdb;
 
-      $table = $wpdb->prefix.'femp';
+    $table = $wpdb->prefix.'femp';
 
-      $data = array(
-        'name' => $name,
-        'dni' => $dni,
-        'touches' => $touches,
-        'chrono' => $chrono
-      );
+    $data = array(
+      'name' => $name,
+      'contact' => $contact,
+      'touches' => $touches,
+      'chrono' => $chrono
+    );
 
-      $format = array(
-        '%s','%d','%d','%d'
-      );
+    $format = array(
+      '%s','%d','%d','%d'
+    );
 
-      $wpdb->insert($table,$data,$format);
+    $wpdb->insert($table,$data,$format);
 
-      // Do send top five table results
-      $top5 = $wpdb->get_results(
-        "
-        SELECT * FROM $table ORDER BY $table.`chrono` ASC
-        "
-      );
+    // Do send top five table results
+    $top5 = $wpdb->get_results(
+      "
+      SELECT * FROM $table ORDER BY $table.`chrono` ASC
+      "
+    );
 
-      echo json_encode($top5);
-      die();
-    }
+    echo json_encode($top5);
+    die();
+
   }
 }
 

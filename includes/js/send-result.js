@@ -13,14 +13,14 @@ function printForm(data){
   var name = `<p><input type="text" name="name" placeholder="Nombre" required minlength="3" maxlength="60"></p>`;
   var chrono = `<input id="femp-hidden" name="chrono" type="hidden">`;
   var touches = `<input id="femp-touches" name="touches" type="hidden">`;
-  if(data.competition){
-    var dni = `<p><input type="number" name="dni" placeholder="DNI" required min="1000000" max="60000000"></p>`;
+  if(data.phone){
+    var contact = `<p><input type="number" name="contact" placeholder="Teléfono" required></p>`;
   }else {
-    var dni = `<input name="dni" type="hidden" value="">`;
+    var contact = `<input name="contact" type="hidden" value="">`;
   }
   var button = `<button class="femp-btn-success" type="submit" onclick="fempPost();">Enviar</button>`;
   var reset = `<button onclick="fempConfig();">Volver a intentar</button>`;
-  fempForm.innerHTML = `${name}${chrono}${touches}${dni}<span>${button}${reset}</span>`;
+  fempForm.innerHTML = `${name}${contact}${chrono}${touches}<span>${button}${reset}</span>`;
 }
 
 function fempPost() {
@@ -55,6 +55,7 @@ function fempPost() {
       ctx.textAlign = "left";
       ctx.font = "20px Varela Round";
 
+      console.log(data);
       var space = -35;
       for(var i = 0; i < 5; i++){
         if(data[i]){
@@ -69,21 +70,6 @@ function fempPost() {
           space = (space+50);
         }
       }
-      // // 1)
-      // ctx.fillText("1) Alan Pereyra", (xCenter - 115), (yCenter-65));
-      // ctx.fillText("00:00:00", (xCenter + 75), (yCenter-65));
-      // // 2)
-      // ctx.fillText("2) Jorge Riquelme", (xCenter - 115), (yCenter - 15));
-      // ctx.fillText("00:00:00", (xCenter + 75), (yCenter - 15));
-      // // 3)
-      // ctx.fillText("3) Pablo Flores", (xCenter - 115), (yCenter+35));
-      // ctx.fillText("00:00:00", (xCenter + 75), (yCenter+35));
-      // // 4)
-      // ctx.fillText("4) María Escalante", (xCenter - 115), (yCenter+85));
-      // ctx.fillText("00:00:00", (xCenter + 75), (yCenter+85));
-      // // 5)
-      // ctx.fillText("5) Lucas Perez", (xCenter - 115), (yCenter+135));
-      // ctx.fillText("00:00:00", (xCenter + 75), (yCenter+135));
     })
     .then(res => {
       ctx.font = "15px Varela Round";

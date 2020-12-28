@@ -1,7 +1,6 @@
 <?php
 
-global $femp_db_version;
-$femp_db_version = '1.0';
+$femp_db_version = '1.2';
 
 function femp_install() {
 	global $wpdb;
@@ -11,11 +10,11 @@ function femp_install() {
 
 	$charset_collate = $wpdb->get_charset_collate();
 
-  $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+  $sql = "CREATE TABLE $table_name (
     id mediumint(9) NOT NULL AUTO_INCREMENT,
     name varchar(60) NOT NULL,
-    dni int(8),
-    touches int(100) NOT NULL,
+    contact bigint(14),
+    touches int(3) NOT NULL,
     chrono int(6) NOT NULL,
     PRIMARY KEY  (id)
   ) $charset_collate;";
@@ -30,8 +29,10 @@ register_activation_hook( __FILE__, 'femp_install' );
 
 function femp_db_check() {
 	global $wpdb;
+	global $femp_db_version;
+
 	$query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table_name ) );
-  if ( ! $wpdb->get_var( $query ) == $table_name ) {
+  if ( (! $wpdb->get_var( $query ) == $table_name)||($femp_db_version !== get_option('femp_db_version'))) {
     femp_install();
   }
 }

@@ -1,6 +1,6 @@
 {
-  "levels": 10,
+  "levels": 1,
   "imgNumb": 5,
   "imgSize": 50,
-  "competition": true
+  "phone": true
 }
