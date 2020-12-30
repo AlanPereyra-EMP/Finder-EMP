@@ -23,8 +23,11 @@ function femp(data) {
   ctx.fillStyle = '#262626';
   ctx.font = "15px Varela Round";
   ctx.textAlign = "center";
-  ctx.fillText("Deberás encontrar:", (xCenter + 28), (yCenter /1.5));
-  ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter * 1.7));
+  ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter /1.4));
+  // ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter * 1.7));
+  ctx.font = "20px Varela Round";
+  ctx.textAlign = "center";
+  ctx.fillText("Ver top 5", (xCenter + 28), (yCenter * 2.2));
 
   // TODO: Add fetch and get top 5 positions then add button to use this data
   function startTop5(){
@@ -51,10 +54,6 @@ function femp(data) {
     ctx.drawImage(target, xCenter, yCenter);
   }
 
-  ctx.font = "15px Varela Round";
-  ctx.textAlign = "center";
-  ctx.fillText("Ver top 5", (xCenter + 28), (yCenter * 2.2));
-
   // Detects clicks position on canvas
   canvas.addEventListener("mousedown", ifFempStated);
 
@@ -73,7 +72,7 @@ function femp(data) {
       loadAllImgs();
       audioStart.play();
 
-    }else if (((x > (xCenter - 115)) && (x < (xCenter + 75))) && (y > (yCenter * 2.1))) {
+    }else if (((x > (xCenter - 135)) && (x < (xCenter + 95))) && (y > (yCenter * 2.1))) {
       fempStarted = true;
 
       startTop5();
