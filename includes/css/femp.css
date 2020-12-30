@@ -118,7 +118,9 @@
 body {
   height: 100vh;
   overflow: hidden;
+  touch-action: none;
 }
+
 /* Empralidad-Theme support */
 #top-notice{
   display: none;

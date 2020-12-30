@@ -34,6 +34,9 @@ function add_femp_styles(){
 wp_localize_script('femp_send_js', 'fempAjax', [
   'url' => admin_url('admin-ajax.php')
 ]);
+wp_localize_script('femp_js', 'fempAjax', [
+  'url' => admin_url('admin-ajax.php')
+]);
 
 // Php url images to JS variables using WP Enqueue script
 function php_url_javascript() { ?>

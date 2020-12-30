@@ -23,14 +23,37 @@ function femp(data) {
   ctx.fillStyle = '#262626';
   ctx.font = "15px Varela Round";
   ctx.textAlign = "center";
-  ctx.fillText("El objeto a encontrar es el siguiente:", (xCenter + 28), (yCenter /1.5));
+  ctx.fillText("Deberás encontrar:", (xCenter + 28), (yCenter /1.5));
   ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter * 1.7));
+
+  // TODO: Add fetch and get top 5 positions then add button to use this data
+  function startTop5(){
+    fempResetCanvas();
+    fempTextCanvas('#262626', 'center', '30px', 'Cargando...', 30, 10);
+
+    var fempResult = new FormData(fempForm);
+    fempResult.append( 'action', 'femp_top5' );
+
+    fetch(fempAjax.url, {
+      method: 'POST',
+      mode: 'same-origin',
+      body: fempResult,
+    })
+      .then(res => res.json())
+      .then(data => {
+        fempTop(data);
+      })
+  }
 
   ctx.drawImage(target, xCenter, yCenter);
   target.addEventListener("load", renderTargetStart);
   function renderTargetStart() {
     ctx.drawImage(target, xCenter, yCenter);
   }
+
+  ctx.font = "15px Varela Round";
+  ctx.textAlign = "center";
+  ctx.fillText("Ver top 5", (xCenter + 28), (yCenter * 2.2));
 
   // Detects clicks position on canvas
   canvas.addEventListener("mousedown", ifFempStated);
@@ -49,6 +72,11 @@ function femp(data) {
       fempResetCanvas();
       loadAllImgs();
       audioStart.play();
+
+    }else if (((x > (xCenter - 115)) && (x < (xCenter + 75))) && (y > (yCenter * 2.1))) {
+      fempStarted = true;
+
+      startTop5();
     }
   }
 
@@ -67,6 +95,8 @@ function femp(data) {
   }
 
   // Render all images on random position
+  var tCoordX;
+  var tCoordY;
   function loadAllImgs(){
     for(var l = 0; l < 35; l++){
       for(var i = 0; i <= data.imgNumb; i++){
@@ -153,4 +183,9 @@ window.onload = function(){
   fempFadeIn.classList.add("femp-faded");
   var fempFadeIn = document.getElementById('femp-counter');
   fempFadeIn.classList.add("femp-faded");
+
+  // Disable user-scalable attribute in iOS
+  document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+  });
 }

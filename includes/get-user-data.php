@@ -1,6 +1,9 @@
 <?php
 add_action('wp_ajax_nopriv_femp_send_data', 'femp_get_data');
 add_action('wp_ajax_femp_send_data', 'femp_get_data');
+add_action('wp_ajax_nopriv_femp_top5', 'femp_top5');
+add_action('wp_ajax_femp_top5', 'femp_top5');
+
 
 function femp_get_data(){
   $name = $_POST['name'];
@@ -36,8 +39,22 @@ function femp_get_data(){
 
     echo json_encode($top5);
     die();
-
   }
 }
 
+function femp_top5(){
+  // Do send top five table results
+  global $wpdb;
+
+  $table = $wpdb->prefix.'femp';
+
+  $top5 = $wpdb->get_results(
+    "
+    SELECT * FROM $table ORDER BY $table.`chrono` ASC
+    "
+  );
+
+  echo json_encode($top5);
+  die();
+}
 ?>
