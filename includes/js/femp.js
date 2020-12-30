@@ -44,6 +44,7 @@ function femp(data) {
     })
       .then(res => res.json())
       .then(data => {
+        winner = true;
         fempTop(data);
       })
   }
