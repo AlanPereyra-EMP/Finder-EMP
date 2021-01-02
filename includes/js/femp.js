@@ -23,8 +23,8 @@ function femp(data) {
   ctx.fillStyle = '#262626';
   ctx.font = "15px Varela Round";
   ctx.textAlign = "center";
-  ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter /1.4));
-  // ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter * 1.7));
+  ctx.fillText("Deberás encontrar y tocar este objeto:", (xCenter + 28), (yCenter /1.4));
+  ctx.fillText("Tocá el objeto para comenzar", (xCenter + 28), (yCenter * 1.7));
   ctx.font = "20px Varela Round";
   ctx.textAlign = "center";
   ctx.fillText("Ver top 5", (xCenter + 28), (yCenter * 2.2));

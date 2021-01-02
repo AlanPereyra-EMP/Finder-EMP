@@ -25,7 +25,7 @@ function femp_get_data(){
     );
 
     $format = array(
-      '%s','%d','%d','%d'
+      '%s','%s','%d','%d'
     );
 
     $wpdb->insert($table,$data,$format);

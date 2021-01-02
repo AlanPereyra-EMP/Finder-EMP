@@ -7,7 +7,7 @@ Author: Empralidad
 Author URI: https://empralidad.com.ar/
 Text Domain: femp
 License: GPLv2 or later
-Version: 1.0.2
+Version: 1.0.3
 */
 if ( ! defined( 'ABSPATH' ) ){
 	exit;
