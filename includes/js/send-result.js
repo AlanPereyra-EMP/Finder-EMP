@@ -13,7 +13,7 @@ function printForm(data){
 
   name = `<p><input id="name" type="text" name="name" placeholder="Nombre" required minlength="3" maxlength="60"></p>`;
   if(data.email){
-    contact = `<p><input type="text" name="contact" placeholder="Email" required minlength="13" maxlength="60"></p>`;
+    contact = `<p><input type="text" name="contact" placeholder="Email o Teléfono" required minlength="6" maxlength="60"></p>`;
   }else {
     contact = `<input name="contact" type="hidden" value="">`;
   }
@@ -33,7 +33,7 @@ function fempPost() {
   var fempResult = new FormData(fempForm);
   fempResult.append( 'action', 'femp_send_data' );
 
-  if(fempForm.name.value.length < 3||fempForm.contact.value.length < 13){
+  if(fempForm.name.value.length < 2||fempForm.contact.value.length < 5){
     return
   }
 
