@@ -152,6 +152,8 @@ function femp(data) {
         ctx.textAlign = "center";
         ctx.fillText("Felicidades,", (xCenter + 28), (yCenter/2.4));
         ctx.fillText("Completaste el juego!!", (xCenter + 28), (yCenter/1.7));
+        ctx.font = "8px Varela Round";
+        ctx.fillText("Enviando el resultado estás aceptado los terminos y condiciones", (xCenter + 28), (yCenter * 2));
         ctx.font = "15px Varela Round";
         ctx.fillText("Tu tiempo fue:", (xCenter + 28), (yCenter * 2.2));
         // Do give the username and time, then send the data to the server
