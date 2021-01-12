@@ -1,6 +1,6 @@
 <?php
 
-$femp_db_version = '1.3';
+$femp_db_version = '1.5';
 
 function femp_install() {
 	global $wpdb;
@@ -13,7 +13,8 @@ function femp_install() {
   $sql = "CREATE TABLE $table_name (
     id mediumint(9) NOT NULL AUTO_INCREMENT,
     name varchar(60) NOT NULL,
-    contact varchar(50),
+		contact varchar(50),
+    time varchar(50),
     touches int(3) NOT NULL,
     chrono int(6) NOT NULL,
     PRIMARY KEY  (id)

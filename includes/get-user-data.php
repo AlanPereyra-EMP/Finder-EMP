@@ -9,6 +9,7 @@ function femp_get_data(){
   $name = $_POST['name'];
   $contact = $_POST['contact'];
   $touches = $_POST['touches'];
+  $time = $_POST['time'];
   $chrono = $_POST['chrono'];
 
   if(($name != '')&&($contact != '')){
@@ -21,11 +22,12 @@ function femp_get_data(){
       'name' => $name,
       'contact' => $contact,
       'touches' => $touches,
+      'time' => $time,
       'chrono' => $chrono
     );
 
     $format = array(
-      '%s','%s','%d','%d'
+      '%s','%s','%d','%s','%d'
     );
 
     $wpdb->insert($table,$data,$format);

@@ -19,16 +19,19 @@ function printForm(data){
   }
   var chrono = `<input id="femp-hidden" name="chrono" type="hidden">`;
   var touches = `<input id="femp-touches" name="touches" type="hidden">`;
+  var time = `<input id="femp-time" name="time" type="hidden">`;
   var button = `<button class="femp-btn-success" type="submit" onclick="fempPost();">Enviar</button>`;
   var reset = `<button onclick="fempConfig();">Volver a intentar</button>`;
-  fempForm.innerHTML = `${name}${contact}${chrono}${touches}<span>${button}${reset}</span>`;
+  fempForm.innerHTML = `${name}${contact}${chrono}${touches}${time}<span>${button}${reset}</span>`;
 }
 
 function fempPost() {
   fempHidden = document.getElementById('femp-hidden');
-  fempHidden.value = `${mFinal}${sFinal}${msFinal}`;
+  fempHidden.value = `${t.minutes}${t.seconds}${t.miliSeconds}`;
   fempTouches = document.getElementById('femp-touches');
   fempTouches.value = `${touchCount}`;
+  fempTime = document.getElementById('femp-time');
+  fempTime.value = new Date().toISOString().slice(0, 10);
 
   var fempResult = new FormData(fempForm);
   fempResult.append( 'action', 'femp_send_data' );

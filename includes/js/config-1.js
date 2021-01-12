@@ -4,6 +4,7 @@ function fempConfig() {
     .then(data => {
       fempFiles(data);
       femp(data);
+      resetCounter();
     });
 }
 fempConfig();
