@@ -1,12 +1,13 @@
 <?php
 /*
 Plugin Name: Finder EMP
-Plugin URI: https://empralidad.com.ar/finder-emp
+Plugin URI: https://empralidad.com.ar/prueba-de-plugin-femp
 Description: Finder EMP es un plugin para WordPress que añade un minijuego de búsqueda mediante un shortcode.
 Author: Empralidad
 Author URI: https://empralidad.com.ar/
 Text Domain: femp
-License: GPLv2 or later
+License: Attribution-NonCommercial-NoDerivatives 3.0 IGO
+License URI: https://creativecommons.org/licenses/by-nc-nd/3.0/igo/legalcode
 Version: 1.0.3
 */
 if ( ! defined( 'ABSPATH' ) ){
