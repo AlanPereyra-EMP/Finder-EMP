@@ -23,7 +23,7 @@ function femp(data) {
   ctx.fillStyle = '#262626';
   ctx.font = "15px Varela Round";
   ctx.textAlign = "center";
-  ctx.fillText("Deberás encontrar esta manzana:", (xCenter + 28), (yCenter /1.4));
+  ctx.fillText("Deberás encontrar esta zapatilla:", (xCenter + 28), (yCenter /1.4));
   ctx.fillText("Los 5 mejores aparecerán en el top", (xCenter + 28), (yCenter * 1.7));
   ctx.font = "20px Varela Round";
   ctx.textAlign = "center";
