@@ -132,9 +132,6 @@ body {
   position: fixed;
   width: 100vw;
 }
-.femp-d-none{
-  display: none;;
-}
 
 /* Html modify */
 input::-webkit-outer-spin-button,
