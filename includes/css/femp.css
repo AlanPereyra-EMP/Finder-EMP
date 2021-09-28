@@ -1,6 +1,6 @@
 #femp-page{
-  background: #fff;
-  border-top: 60px solid #262626;
+  background: var(--emp-content-bg);
+  border-top: 60px solid var(--emp-nav-bg);
   display: flex;
   height: 100vh;/* theme must be support viewport */
   left: 0;
@@ -55,8 +55,8 @@
   padding: 6px;
 }
 .femp-btn-success{
-  background: #005777;
-  color: #fff;
+  background: var(--emp-btn-bg);
+  color: var(--emp-btn-color);
   order: 2;
 }
 #femp-title{
@@ -83,7 +83,7 @@
 }
 @media(max-width:565px){
   #femp-page{
-    border-bottom: 38px solid #262626;
+    border-bottom: 38px solid var(--emp-nav-bg);
   }
   #femp-form button{
     font-size: 15px;

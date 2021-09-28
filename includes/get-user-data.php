@@ -51,9 +51,7 @@ function femp_top5(){
   $table = $wpdb->prefix.'femp';
 
   $top5 = $wpdb->get_results(
-    "
-    SELECT * FROM $table ORDER BY $table.`chrono` ASC
-    "
+    "SELECT * FROM $table ORDER BY $table.`chrono` ASC"
   );
 
   echo json_encode($top5);
