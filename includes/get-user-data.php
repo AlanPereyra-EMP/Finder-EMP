@@ -34,9 +34,7 @@ function femp_get_data(){
 
     // Do send top five table results
     $top5 = $wpdb->get_results(
-      "
-      SELECT * FROM $table ORDER BY $table.`chrono` ASC
-      "
+      "SELECT * FROM $table ORDER BY $table.`chrono` ASC"
     );
 
     echo json_encode($top5);
